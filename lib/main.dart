@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sdui_demo/tile_button_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,10 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold(
+      body: Center(
+        child: TileButtonView()
+      ),
+    );
   }
 }
