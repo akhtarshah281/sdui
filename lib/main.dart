@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sdui_demo/tile_button_view.dart';
 
 void main() {
@@ -39,11 +40,26 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getDate();
+  }
+
+  void getDate() async {
+    await Future.delayed(const Duration(seconds: 2));
+    String response =
+        await rootBundle.loadString('assets/mock_json/tile_button.json');
+    
+    
+    debugPrint('-----------RESPONSE===>$response');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: TileButtonView()
-      ),
+      body: Center(child: TileButtonView()),
     );
   }
 }

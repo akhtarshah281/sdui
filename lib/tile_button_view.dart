@@ -8,40 +8,60 @@ class TileButtonView extends StatelessWidget {
     this.title,
     this.prefixIcon,
     this.suffixIcon,
+    this.onTap,
+    this.margin = const EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
+    this.backgroundColor = Colors.transparent,
+    this.borderColor = Colors.transparent,
+    this.borderWidth = 0.0,
   }) : super(key: key);
 
   final String? title;
   final String? prefixIcon;
   final String? suffixIcon;
+  final VoidCallback? onTap;
+  final EdgeInsetsGeometry margin;
+  final double borderWidth;
+  final Color? backgroundColor, borderColor;
 
-  // String? title;
-  // String? title;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 60,
-        width: double.infinity,
-        child: Material(
-          color: Colors.blueAccent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-            side: BorderSide(color: Colors.pink, width: 2),
-          ),
-          child: InkWell(
-            onTap: () {},
+    return Container(
+      margin: margin,
+      height: 60,
+      width: double.infinity,
+      child: Material(
+        color: Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: borderColor!, width: borderWidth),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
             child: Row(
               children: [
                 if (prefixIcon != null) ...[
-                  const CustomImage(
+                  CustomImage(
                     height: 40,
                     width: 40,
-                    // imagePath: prefixIcon!,
-                    imagePath: 'https://picsum.photos/200/300?random=14',
+                    imagePath: prefixIcon!,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  const SizedBox(width: 15),
+                ],
+                if (title != null)
+                  Expanded(
+                    child: Text(title!),
+                  ),
+                if (suffixIcon != null)
+                  CustomImage(
+                    imagePath: prefixIcon!,
+                    height: 15,
+                    width: 15,
+                    borderRadius: BorderRadius.circular(10),
                   )
-                ]
               ],
             ),
           ),
