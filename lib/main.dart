@@ -36,9 +36,6 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-
-
-
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
