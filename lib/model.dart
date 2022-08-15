@@ -72,12 +72,12 @@ class Sections {
   });
 
   Sections.fromJson(dynamic json) {
-    en = json['en'] != null ? En.fromJson(json['en']) : null;
-    ar = json['ar'];
+    en = json['en'] != null ? LanguageModel.fromJson(json['en']) : null;
+    ar = json['ar']!= null ? LanguageModel.fromJson(json['ar']) : null ;
   }
 
-  En? en;
-  dynamic ar;
+  LanguageModel? en;
+  LanguageModel? ar;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -89,19 +89,19 @@ class Sections {
   }
 }
 
-En enFromJson(String str) => En.fromJson(json.decode(str));
+LanguageModel enFromJson(String str) => LanguageModel.fromJson(json.decode(str));
 
-String enToJson(En data) => json.encode(data.toJson());
+String enToJson(LanguageModel data) => json.encode(data.toJson());
 
-class En {
-  En({
+class LanguageModel {
+  LanguageModel({
     this.sortOrder,
     this.uiType,
     this.content,
     this.action,
   });
 
-  En.fromJson(dynamic json) {
+  LanguageModel.fromJson(dynamic json) {
     sortOrder = json['sort_order'];
     uiType = json['ui_type'];
     content = json['content'];

@@ -51,8 +51,7 @@ class _HomeViewState extends State<HomeView> {
     await Future.delayed(const Duration(seconds: 2));
     String response =
         await rootBundle.loadString('assets/mock_json/tile_button.json');
-    
-    
+
     debugPrint('-----------RESPONSE===>$response');
   }
 
