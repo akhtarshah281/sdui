@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sdui_demo/models/sections_model.dart';
 import 'package:sdui_demo/tile_button_view.dart';
+import 'package:sdui_demo/widget_mapper.dart';
 
+import 'loading.dart';
 import 'models/action_model.dart';
+import 'models/model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,31 +45,72 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  bool isLoading = true;
+  bool isError = false;
+  String? errorMessage;
+
+  List<Widget> widgetList = [];
+
   /// init method to load data
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    getDate();
+    getData();
   }
 
   /// load and print local json object method
-  void getDate() async {
+  void getData() async {
     await Future.delayed(const Duration(seconds: 2));
     String response =
         await rootBundle.loadString('assets/mock_json/tile_button.json');
 
     debugPrint('-----------RESPONSE===>$response');
+
+    try {
+      ResponseModel responseModel = responseModelFromJson(response);
+
+      if (responseModel.data != null && responseModel.data!.sections != null) {
+        for (SectionsModel sectionsModel in responseModel.data!.sections!) {
+          if (sectionsModel.en != null) {
+            widgetList.add(
+                await WidgetMapper.getWidget(languageModel: sectionsModel.en!));
+          } else {
+            widgetList.add(
+                await WidgetMapper.getWidget(languageModel: sectionsModel.ar!));
+          }
+        }
+      }
+      setState(() => isLoading = false);
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+        isError = true;
+        errorMessage = 'Error :: $e';
+      });
+    }
   }
 
   /// main build method
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: TileButtonView()),
+    return Scaffold(
+      body: isLoading
+          ? const Loading()
+          : isError
+              ? Text(errorMessage!)
+              : ListView.separated(
+                  shrinkWrap: true,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                  itemBuilder: (context, index) {
+                    return widgetList[index];
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 20);
+                  },
+                  itemCount: widgetList.length),
     );
   }
-
-
 }

@@ -2,18 +2,19 @@ import 'dart:convert';
 
 import 'data_model.dart';
 
-Model modelFromJson(String str) => Model.fromJson(json.decode(str));
+ResponseModel responseModelFromJson(String str) =>
+    ResponseModel.fromJson(json.decode(str));
 
-String modelToJson(Model data) => json.encode(data.toJson());
+String responseModelToJson(ResponseModel data) => json.encode(data.toJson());
 
-class Model {
-  Model({
+class ResponseModel {
+  ResponseModel({
     this.success,
     this.serverTime,
     this.data,
   });
 
-  Model.fromJson(dynamic json) {
+  ResponseModel.fromJson(dynamic json) {
     success = json['success'];
     serverTime = json['server_time'];
     data = json['data'] != null ? DataModel.fromJson(json['data']) : null;
