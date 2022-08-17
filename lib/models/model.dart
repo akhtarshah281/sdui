@@ -33,9 +33,3 @@ class Model {
     return map;
   }
 }
-
-
-
-
-
-

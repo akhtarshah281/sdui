@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:sdui_demo/action_model.dart';
+import 'package:sdui_demo/models/action_model.dart';
 
 LanguageModel enFromJson(String str) =>
     LanguageModel.fromJson(json.decode(str));
