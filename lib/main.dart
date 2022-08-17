@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sdui_demo/tile_button_view.dart';
 
+import 'models/action_model.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -60,5 +62,32 @@ class _HomeViewState extends State<HomeView> {
     return const Scaffold(
       body: Center(child: TileButtonView()),
     );
+  }
+
+  List<Widget> getButton(List<ActionModel> actionList, BuildContext context) {
+    List<Widget> buttonWidget = [];
+
+    for (ActionModel model in actionList) {
+      switch (model.uiType) {
+        case 'tile_button':
+          buttonWidget.add(
+            TileButtonView(
+              title: model.title,
+              prefixIcon: model.prefixIcon,
+              suffixIcon: model.suffixIcon,
+              margin: const EdgeInsets.symmetric(horizontal: 25),
+              onTap: () {
+                //TODO:
+              },
+            ),
+          );
+          break;
+
+        default:
+          const Text('Error widget');
+      }
+    }
+
+    return buttonWidget;
   }
 }
