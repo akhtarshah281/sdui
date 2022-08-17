@@ -41,6 +41,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  /// init method to load data
   @override
   void initState() {
     // TODO: implement initState
@@ -49,6 +50,7 @@ class _HomeViewState extends State<HomeView> {
     getDate();
   }
 
+  /// load and print local json object method
   void getDate() async {
     await Future.delayed(const Duration(seconds: 2));
     String response =
@@ -57,14 +59,13 @@ class _HomeViewState extends State<HomeView> {
     debugPrint('-----------RESPONSE===>$response');
   }
 
+  /// main build method
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(child: TileButtonView()),
     );
   }
-
-
 
   /// created button list and returned specific type of button by using for loop on ActionModel
   List<Widget> getButton(List<ActionModel> actionList, BuildContext context) {
