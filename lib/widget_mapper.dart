@@ -9,7 +9,8 @@ class WidgetMapper {
 
   static WidgetMapper get i => WidgetMapper._();
 
-  Future<Widget> getWidget({
+  /// getting widgets by checking UI TYPE inside language model
+  static Future<Widget> getWidget({
     BuildContext? context,
     required LanguageModel languageModel,
   }) async {
