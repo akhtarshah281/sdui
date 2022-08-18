@@ -22,6 +22,26 @@
           ]
         },
         "ar": null
+      },
+      {
+        "en": {
+          "sort_order": 0,
+          "ui_type": "tile_button",
+          "content": null,
+          "action": [
+            {
+              "ui_type": "tile_button",
+              "title": "Test Txt",
+              "subtitle": "See your current repair status",
+              "prefix_icon": null,
+              "suffix_icon": null,
+              "name": "screen",
+              "route": "/car-current-repair-status",
+              "type": "navigation"
+            }
+          ]
+        },
+        "ar": null
       }
     ]
   }
