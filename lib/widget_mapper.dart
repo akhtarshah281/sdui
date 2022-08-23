@@ -13,6 +13,7 @@ class WidgetMapper {
   static Future<Widget> getWidget({
     BuildContext? context,
     required LanguageModel languageModel,
+    VoidCallback? onTap,
   }) async {
     switch (languageModel.uiType) {
       case 'tile_button':

@@ -19,7 +19,9 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Center(child: _getLoader(context)),
+      child: Center(
+        child: _getLoader(context),
+      ),
     );
   }
 
