@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:sdui_demo/models/sections_model.dart';
+
+import 'section_model.dart';
 
 DataModel dataFromJson(String str) => DataModel.fromJson(json.decode(str));
 

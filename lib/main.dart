@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sdui_demo/models/sections_model.dart';
 import 'package:sdui_demo/tile_button_view.dart';
 import 'package:sdui_demo/widget_mapper.dart';
 
+import 'details_screen.dart';
 import 'loading.dart';
 import 'models/action_model.dart';
+import 'models/section_model.dart';
 import 'models/model.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +23,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter SDUI Demo',
+      navigatorKey: navigatorKey,
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const HomeView(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/details': (context) => const DetailsScreen(),
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +43,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomeView(),
     );
   }
 }
@@ -61,10 +71,10 @@ class _HomeViewState extends State<HomeView> {
   }
 
   /// load and print local json object method
-  void getData() async {
+  void getData({String endPoint = 'tile_button'}) async {
     await Future.delayed(const Duration(seconds: 2));
     String response =
-        await rootBundle.loadString('assets/mock_json/tile_button.json');
+        await rootBundle.loadString('assets/mock_json/$endPoint.json');
 
     debugPrint('-----------RESPONSE===>$response');
 
@@ -73,13 +83,8 @@ class _HomeViewState extends State<HomeView> {
 
       if (responseModel.data != null && responseModel.data!.sections != null) {
         for (SectionsModel sectionsModel in responseModel.data!.sections!) {
-          if (sectionsModel.en != null) {
-            widgetList.add(
-                await WidgetMapper.getWidget(languageModel: sectionsModel.en!));
-          } else {
-            widgetList.add(
-                await WidgetMapper.getWidget(languageModel: sectionsModel.ar!));
-          }
+          widgetList
+              .add(await WidgetMapper.getWidget(languageModel: sectionsModel));
         }
       }
       setState(() => isLoading = false);

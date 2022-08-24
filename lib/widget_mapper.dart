@@ -1,8 +1,10 @@
-import 'package:sdui_demo/models/language_model.dart';
+import 'package:sdui_demo/details_screen.dart';
+import 'package:sdui_demo/models/arguments_model.dart';
+import 'package:sdui_demo/models/section_model.dart';
 import 'package:sdui_demo/tile_button_view.dart';
-
-import 'models/action_model.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'models/action_model.dart';
 
 class WidgetMapper {
   WidgetMapper._();
@@ -12,7 +14,7 @@ class WidgetMapper {
   /// getting widgets by checking UI TYPE inside language model
   static Future<Widget> getWidget({
     BuildContext? context,
-    required LanguageModel languageModel,
+    required SectionsModel languageModel,
     VoidCallback? onTap,
   }) async {
     switch (languageModel.uiType) {
@@ -42,9 +44,7 @@ class WidgetMapper {
               prefixIcon: model.prefixIcon,
               suffixIcon: model.suffixIcon,
               margin: const EdgeInsets.symmetric(horizontal: 25),
-              onTap: () {
-                //TODO:
-              },
+              onTap: () => onTap(model),
             ),
           );
           break;
@@ -55,5 +55,30 @@ class WidgetMapper {
     }
 
     return buttonWidget;
+  }
+
+  void onTap(
+    ActionModel actionModel, {
+    BuildContext? context,
+    dynamic arguments,
+  }) {
+    debugPrint('-------Clicked-----');
+    navigatorKey.currentState?.pushNamed(
+      '/details',
+      arguments: ArgumentsModel(
+        title: actionModel.title ?? 'Akhtar',
+        subTitle: actionModel.subtitle ?? 'Akhtar is a Flutter Developer',
+        uiType: actionModel.uiType ?? 'Tile_Button',
+      ),
+    );
+    //
+    // Navigator.pushNamed(
+    //   context!,
+    //   DetailsScreen.routeName,
+    //   arguments: ArgumentsModel(
+    //       title: 'Akhtar',
+    //       subTitle: 'Akhtar is a Flutter Developer',
+    //       uiType: 'Tile_Button'),
+    // );
   }
 }

@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:sdui_demo/models/action_model.dart';
 
-LanguageModel enFromJson(String str) =>
-    LanguageModel.fromJson(json.decode(str));
+SectionsModel sectionModelFromJson(String str) =>
+    SectionsModel.fromJson(json.decode(str));
 
-String enToJson(LanguageModel data) => json.encode(data.toJson());
+String sectionModelToJson(SectionsModel data) => json.encode(data.toJson());
 
-class LanguageModel {
-  LanguageModel({
+class SectionsModel {
+  SectionsModel({
     this.sortOrder,
     this.uiType,
     this.content,
@@ -20,7 +20,7 @@ class LanguageModel {
   dynamic content;
   List<ActionModel>? action;
 
-  LanguageModel.fromJson(dynamic json) {
+  SectionsModel.fromJson(dynamic json) {
     sortOrder = json['sort_order'];
     uiType = json['ui_type'];
     content = json['content'];

@@ -4,44 +4,28 @@
   "data": {
     "sections": [
       {
-        "en": {
-          "sort_order": 0,
-          "ui_type": "tile_button",
-          "content": null,
-          "action": [
-            {
-              "ui_type": "tile_button",
-              "title": "My Current Repair Status",
-              "subtitle": "See your current repair status",
-              "prefix_icon": "https://picsum.photos/200/300?random=14",
-              "suffix_icon": "assets/icons/project_icons/icon_forward.svg",
-              "name": "screen",
-              "route": "/car-current-repair-status",
-              "type": "navigation"
-            }
-          ]
+        "sort_order": 3,
+        "ui_type": "tile_button",
+        "content": {
+          "title": "Need Roadside assistance"
         },
-        "ar": null
-      },
-      {
-        "en": {
-          "sort_order": 0,
-          "ui_type": "tile_button",
-          "content": null,
-          "action": [
-            {
-              "ui_type": "tile_button",
-              "title": "Test Txt",
-              "subtitle": "See your current repair status",
-              "prefix_icon": null,
-              "suffix_icon": null,
-              "name": "screen",
-              "route": "/car-current-repair-status",
-              "type": "navigation"
+        "action": [
+          {
+            "ui_type": "tile_button",
+            "prefix_icon": "https://picsum.photos/200/300?random=1",
+            "suffix_icon": null,
+            "title": "Get Assistance",
+            "subtitle": null,
+            "name": "screen",
+            "route": "/dynamic-listing-view",
+            "type": "navigation",
+            "end_point": "roadside_assistance",
+            "api_method": "GET",
+            "args": {
+              "page_type": "roadside_assistance"
             }
-          ]
-        },
-        "ar": null
+          }
+        ]
       }
     ]
   }
